@@ -1,0 +1,10 @@
+How to identify Recursion:
+1) The question says to count total number of possible ways [in such ques we return 1 from the base case in the recursive code]
+2) There are multiple ways to do a task but we need to find the max/min output.
+
+Recursion-> DP
+* DP is applied when we can find the optimal solution of a bigger problem using smaller subproblems
+* There should be overlapping subproblems(same subproblems appearing again and again) eg..while 
+  calculating the nth fibonacci number we count the fibonacci of a particular number multiple number of times
+
+   
