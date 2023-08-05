@@ -1,0 +1,66 @@
+/* On applying dry run the question is exactly similar to that of finding nth fibonacci number so 
+the code and dp optimisations remain same
+*/
+
+//Recursion-> Time Complexity: O(2^n)-> Space Complexity: O(n)
+class Solution {
+    public int climbStairs(int n) {
+        if(n<=1){
+            return n;
+        }
+        return climbStairs(n-1)+climbStairs(n-2);
+    }
+}
+
+//Memoization-> Time Complexity: O(n)-> Space Complexity: O(n)
+class Solution {
+    public int climbStairs(int n) {
+        int[] dp=new int[n+1];
+        Arrays.fill(dp,-1);
+        int ans=dphelp(dp,n);
+        return ans;
+    }
+
+    public int dphelp(int[] dp,int n){
+        if(n==0||n==1){
+            return 1;
+        }
+        
+        if(dp[n]!=-1){
+            return dp[n];
+        }
+
+        dp[n]=dphelp(dp,n-1)+dphelp(dp,n-2);
+        return dp[n];
+    }
+}
+
+//Tabulation->Time Complexity: O(n)-> Space Complexity: O(n)
+class Solution {
+    public int climbStairs(int n) {
+        int[] dp=new int[n+1];
+        Arrays.fill(dp,-1);
+        dp[0]=1;
+        dp[1]=1;
+        for(int i=2;i<=n;i++){
+            dp[i]=dp[i-1]+dp[i-2]; 
+        }
+        return dp[n];
+    }
+}
+
+//Space Optimized-> Time Complexity: O(n)-> Space Complexity: O(1)
+class Solution {
+    public int climbStairs(int n) {
+        int[] dp=new int[2];
+        Arrays.fill(dp,-1);
+        dp[0]=1;
+        dp[1]=1;
+        for(int i=2;i<=n;i++){
+            int temp=dp[1];
+            dp[1]=dp[0]+dp[1];
+            dp[0]=temp;
+        }
+        return dp[1];
+    }
+}
