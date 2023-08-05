@@ -1,0 +1,27 @@
+/*Time Complexity: O(n*k) Space Complexity: O(n)*/
+
+import java.util.*;
+public class Solution {
+    public static int minimizeCost(int n, int k, int []arr){
+        int dp[]=new int[n];
+        Arrays.fill(dp,-1);
+        int ans=help(n-1,k,arr,dp);
+        return ans;
+    }
+    public static int help(int n, int k, int []arr,int[] dp){
+        dp[0]=0;
+        for(int j=1;j<=n;j++){
+            int min_jump=Integer.MAX_VALUE;
+            for(int i=1;i<=k;i++){
+                if(j-i>=0){
+                    int prev=dp[j-i];
+                    int currjumpcost=Math.abs(arr[j]-arr[j-i]);
+                    int jump=prev+currjumpcost;
+                    min_jump=Math.min(min_jump,jump);
+                }
+            }
+            dp[j]=min_jump;
+        }
+        return dp[n];
+    }
+}

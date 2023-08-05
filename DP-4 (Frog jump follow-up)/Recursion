@@ -1,0 +1,35 @@
+/* Problem Statement: The question was the follow-up of dp-3 but in dp-3 the frog can jump 1,2 steps whereas in this question
+the frog can jump upto k steps. So, we have to find the minimum cost to reach the last stone. The cost to jump from i to j
+is abs(arr[i]-arr[j]).
+
+CodeStudio Link: https://www.codingninjas.com/studio/problems/minimal-cost_8180930?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=0
+Imp : Tabulation Method ; Use of for loop in recursion (when stuffs to do on index is more)
+*/
+
+import java.util.*;
+public class Solution {
+    public static int minimizeCost(int n, int k, int []arr){
+        int ans=help(n-1,k,arr);
+        return ans;
+    }
+
+    public static int help(int n, int k, int []arr){
+        
+        if(n==0){
+            return 0;
+        }
+        int min_jump=Integer.MAX_VALUE;
+        for(int i=1;i<=k;i++){
+            if(n-i>=0){
+                int prev=help(n-i,k,arr);
+                int currjumpcost=Math.abs(arr[n]-arr[n-i]);
+                int jump=prev+currjumpcost;
+                min_jump=Math.min(min_jump,jump);
+            }
+            
+        }
+        return min_jump;
+    }
+
+    
+}

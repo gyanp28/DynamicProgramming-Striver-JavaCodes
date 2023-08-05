@@ -1,0 +1,32 @@
+import java.util.*;
+public class Solution {
+    public static int minimizeCost(int n, int k, int []arr){
+        int dp[]=new int[n];
+        Arrays.fill(dp,-1);
+        int ans=help(n-1,k,arr,dp);
+        //in the above function we are passing n-1 as the index of the last element
+        return ans;
+    }
+
+    public static int help(int n, int k, int []arr,int[] dp){
+        if(n==0){
+            dp[0]=0;
+            return 0; //base case 
+        }
+        if(dp[n]!=-1){
+            return dp[n]; //memoization 
+        }
+        int min_jump=Integer.MAX_VALUE;
+        for(int i=1;i<=k;i++){  //k steps 
+            if(n-i>=0){ //if the location to reach is valid i.e. not negative
+                int prev=help(n-i,k,arr,dp); //prev stores the minimum cost to reach n-i
+                int currjumpcost=Math.abs(arr[n]-arr[n-i]);//cost to jump from n-i to n
+                int jump=prev+currjumpcost;//total cost to reach n from start for current jump
+                min_jump=Math.min(min_jump,jump); //min cost to reach n from start
+            }
+            
+        }
+        dp[n]=min_jump; 
+        return dp[n];
+    }
+}
