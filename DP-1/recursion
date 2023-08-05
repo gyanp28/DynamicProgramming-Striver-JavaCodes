@@ -1,5 +1,11 @@
+/* Leetcode Question Link: https://leetcode.com/problems/fibonacci-number/
+CodeStudio Question Link:  https://www.codingninjas.com/studio/problems/nth-fibonacci-number_74156?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf 
+Question : Nth Fibonacci Number
+Approach : Recursion
+Time Complexity : O(2^n)
+Space Complexity : O(n) 
+                            */
 class Solution {
-    
     public int fib(int n) {
         if (n==0){
             return 0;
