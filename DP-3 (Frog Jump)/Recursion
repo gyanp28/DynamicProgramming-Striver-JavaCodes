@@ -1,0 +1,25 @@
+/* CodeStudio Problem Link: https://www.codingninjas.com/studio/problems/frog-jump_3621012?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=0
+   Striver Video Link : https://youtu.be/EgG3jsGoPvQ
+   Leetcode Problem Link: https://leetcode.com/problems/min-cost-climbing-stairs/
+*/
+
+/*Time Complexity: O(2^n) and Space Complexity: O(N) */
+
+import java.util.*;
+public class Solution {
+    public static int frogJump(int n, int heights[]) {
+        int ans=help(n - 1, heights);
+        return ans;
+    }
+    public static int help(int n, int heights[]) {
+        if (n == 0) {
+            return 0;
+        }
+        int l = help(n - 1, heights) + Math.abs(heights[n-1] - heights[n]);
+        int r = Integer.MAX_VALUE;
+        if (n >= 2) {
+            r = help(n - 2, heights) + Math.abs(heights[n-2] - heights[n]);
+        }
+        return Math.min(l, r);   
+    }
+}

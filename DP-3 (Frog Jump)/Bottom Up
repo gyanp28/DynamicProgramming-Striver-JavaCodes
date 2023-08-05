@@ -1,0 +1,24 @@
+/* Time Complexity: O(n) Space Complexity: O(n) */
+
+import java.util.*;
+public class Solution {
+    public static int frogJump(int n, int heights[]) {
+        int[] dp = new int[n];
+        Arrays.fill(dp, -1);
+        int ans=help(n , heights, dp);
+        return ans;
+    }
+
+    public static int help(int n, int heights[], int[] dp) {
+    dp[0]=0;
+    for(int i=1;i<n;i++){
+        int l = dp[i-1] + Math.abs(heights[i-1] - heights[i]);
+        int r = Integer.MAX_VALUE;
+        if (i >= 2) {
+            r = dp[i-2] + Math.abs(heights[i-2] - heights[i]);
+        }
+        dp[i] = Math.min(l, r);
+    }
+    return dp[n-1];
+}
+
