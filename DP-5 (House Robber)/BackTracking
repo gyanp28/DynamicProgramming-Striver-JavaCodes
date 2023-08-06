@@ -5,6 +5,7 @@
 */
 
 //This is a simple backtracking solution using the pick and don't pick approach.
+
 class Solution {
     public int rob(int[] arr) {
         return help(0,0,-2,arr);

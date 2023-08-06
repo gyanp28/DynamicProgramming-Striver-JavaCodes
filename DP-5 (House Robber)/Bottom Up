@@ -13,11 +13,11 @@ class Solution {
     public int help(int n,int[] arr,int[] dp){
         dp[0]=arr[0];
         for(int i=1;i<n;i++){
-            int pick=arr[i];
-            if(i>1){
+            int pick=arr[i];//picking the current element and adding it to the sum of the previous non adjacent elements 
+            if(i>1){//if i==1 then we can't pick i-2
                 pick=pick+dp[i-2];
             }
-            int non_pick=dp[i-1];
+            int non_pick=dp[i-1];//not picking the current element and taking the sum of the previous non adjacent elements
             dp[i]=Math.max(pick,non_pick);
             
         }

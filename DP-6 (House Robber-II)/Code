@@ -1,0 +1,54 @@
+/* House Robber 2
+https://leetcode.com/problems/house-robber-ii/description/
+Time Complexity: O(n)
+Space Complexity: O(n)
+
+
+The question is similar to house robber 1 with the only difference that here the first and last house are connected 
+so in any case the first and last house can't be robbed together so we will have to leave one of them and 
+then find the max sum and then return the max sum out of these two
+1)Leave first house and find the max sum
+2)Leave last house and find the max sum
+3)Return the max sum out of these two
+
+*/
+
+class Solution {
+    public int rob(int[] arr) {
+        int n=arr.length;
+        if(n==1){
+            return arr[0]; //edge case when array size is 1 then leaving  first/last elem will generate indexoutofbound as arrray size will be zero
+        }
+        int[] dp=new int[n+1];
+        Arrays.fill(dp,-1);
+
+        int[] arr1=new int[n-1]; //leave first array
+        int[] arr2=new int[n-1];//leave last array
+        for(int i=0;i<arr1.length;i++){
+            arr1[i]=arr[i+1];
+        }
+
+        for(int i=0;i<arr.length-1;i++){
+            arr2[i]=arr[i];
+        }
+
+        int leavefirst=help(arr1.length,arr1,dp); 
+        int leavelast=help(arr2.length,arr2,dp);
+        return Math.max(leavefirst,leavelast);
+    }
+
+    public int help(int n,int[] arr,int[] dp){
+        dp[0]=arr[0];
+        for(int i=1;i<n;i++){
+            int pick=arr[i];
+            if(i>1){
+                pick=pick+dp[i-2];
+            }
+            int non_pick=dp[i-1];
+            dp[i]=Math.max(pick,non_pick);
+            
+        }
+        return dp[n-1];
+    }
+}
+
