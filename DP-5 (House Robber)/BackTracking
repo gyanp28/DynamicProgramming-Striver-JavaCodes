@@ -1,0 +1,30 @@
+/* Leetocde: 198  https://leetcode.com/problems/house-robber/description/
+   CodeStudio: https://www.codingninjas.com/studio/problems/maximum-sum-of-non-adjacent-elements_843261?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+   Time Complexity: O(2^n)
+   Space Complexity: O(n)   
+*/
+
+//This is a simple backtracking solution using the pick and don't pick approach.
+class Solution {
+    public int rob(int[] arr) {
+        return help(0,0,-2,arr);
+    }
+
+    public int help(int i , int sum,int prev,int[] arr){
+        if(i==arr.length){
+            return sum;
+        }
+        int l=Integer.MIN_VALUE;
+        if(prev+1!=i && prev-1!=i){
+            int temp=prev;
+            prev=i;
+            sum+=arr[i];
+            l=help(i+1,sum,prev,arr);
+            //backtracking
+            prev=temp;
+            sum-=arr[i];
+        }
+        int r=help(i+1,sum,prev,arr);
+        return Math.max(l,r);
+    }
+}

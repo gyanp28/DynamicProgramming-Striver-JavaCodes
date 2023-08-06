@@ -1,0 +1,22 @@
+/* Time Complexity: O(n)
+   Space Complexity: O(n)   
+*/
+
+
+class Solution {
+    public int rob(int[] arr) {
+       return help(arr.length-1,arr); 
+    }
+
+    public int help(int i,int[] arr){
+        if(i==0){
+            return arr[i]; //if we are at 0th index it means we have only have one house to rob
+        }
+        if(i<0){
+            return 0;
+        }
+        int pick=arr[i]+help(i-2,arr);
+        int notpick=0+help(i-1,arr);
+        return Math.max(pick,notpick);
+    }
+}

@@ -1,0 +1,26 @@
+/* Time Complexity: O(n) 
+   Space Complexity: O(1)
+*/
+
+class Solution {
+    public int rob(int[] arr) {
+        int n=arr.length;
+        int[] dp=new int[n+1];
+        Arrays.fill(dp,-1);
+        return help(n,arr,dp); 
+    }
+
+    public int help(int n,int[] arr,int[] dp){
+        dp[0]=arr[0];
+        for(int i=1;i<n;i++){
+            int pick=arr[i];
+            if(i>1){
+                pick=pick+dp[i-2];
+            }
+            int non_pick=dp[i-1];
+            dp[i]=Math.max(pick,non_pick);
+            
+        }
+        return dp[n-1];
+    }
+}
