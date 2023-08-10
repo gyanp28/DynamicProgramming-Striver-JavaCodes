@@ -1,0 +1,36 @@
+/* Time Complexity: O(m*n)
+ * Space Complexity: O(m*n)
+ * 
+ * Approach: 
+ * 1. Start from the bottom right corner and fill the dp array
+ * 2. For each cell, the number of ways to reach the bottom right corner is the sum of the number of ways to reach the cell below it and the cell to the right of it
+ * 3. The number of ways to reach the bottom right corner is 1
+ * 4. Return the number of ways to reach the top left corner
+ * 
+ * */
+
+class Solution {
+    public int uniquePaths(int m, int n) {
+        int dp[][] = new int[m][n];
+        dp[m-1][n-1] = 1;
+        
+        for (int i = m-1; i >= 0; i--) {
+            for (int j = n-1; j >= 0; j--) {
+                if (i == m-1 && j == n-1) {
+                    continue;
+                }
+                int bottom = 0;
+                if (i < m-1) {
+                    bottom = dp[i+1][j];
+                }
+                int right = 0;
+                if (j < n-1) {
+                    right = dp[i][j+1];
+                }
+
+                dp[i][j] = bottom + right;
+            }
+        }
+        return dp[0][0];
+    }
+}
