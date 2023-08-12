@@ -1,0 +1,31 @@
+/* Time Complexity: O(2^(m+n)) 
+Space Complexity: O(m+n) 
+where m is the number of rows and n is the number of columns in the grid.
+LeetCode : https://leetcode.com/problems/minimum-path-sum/submissions/1017555313/
+*/ 
+
+class Solution {
+    public int minPathSum(int[][] grid) {
+        return help(0,0,grid);
+    }
+
+    public int help(int i,int j,int[][] grid){
+        int m=grid.length;
+        int n=grid[0].length;
+        if(i==m-1 && j==n-1){
+            return grid[m-1][n-1];
+        }
+
+        int bottom=Integer.MAX_VALUE;
+        if(i<m-1){
+            bottom=help(i+1,j,grid)+grid[i][j];
+        }
+
+        int right=Integer.MAX_VALUE;
+        if(j<n-1){
+            right=help(i,j+1,grid)+grid[i][j];
+        }
+        return Math.min(bottom,right);
+    }
+
+}

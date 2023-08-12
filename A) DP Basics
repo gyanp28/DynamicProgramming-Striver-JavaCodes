@@ -13,7 +13,11 @@ Recursion-> DP :
 How to find the correct Recurrence Relation :
 1) Try and represent the problem in terms of index.
 2) Do all possible stuffs on that according to the problem statement.
-3) If asked to count all ways-> Sum of those stuffs and return it
+3) If asked to count all ways-> Sum of those stuffs and return it (also return 1 from base case)
    If asked to find the max or min then find max/min in each recursion step.
 
-   
+
+Memoization --> Tabulation
+1) Declare base case
+2) Express all the states in for loop ( all the possible places/states possible).
+3) Copy the recurrence as written in the memoization code and write it.
