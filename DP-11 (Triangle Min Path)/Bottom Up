@@ -1,0 +1,33 @@
+import java.util.List;
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int rows = triangle.size();
+        Integer[][] dp = new Integer[rows][rows]; 
+        for(int i=0;i<rows;i++){
+            for(int j=0;j<rows;j++){
+                dp[i][j]=-1;
+            }
+        }
+        return help(0, 0, triangle, dp);
+    }
+
+    public int help(int row, int prev, List<List<Integer>> triangle, Integer[][] dp) {
+        int lastrow=triangle.size()-1;
+        for(int i=0;i<triangle.get(lastrow).size();i++){
+            dp[lastrow][i]=triangle.get(lastrow).get(i);
+        }
+
+        for(int i=lastrow-1;i>=0;i--){
+            for (int j = 0; j < triangle.get(i).size(); j++){
+                int same = dp[i + 1][j] + triangle.get(i).get(j);  
+                int next = dp[i + 1][j + 1] + triangle.get(i).get(j);  
+                int minPathSum = Math.min(same, next);
+                dp[i][j] = minPathSum; 
+            }
+        }
+        
+        return dp[0][0];
+    }
+}
+

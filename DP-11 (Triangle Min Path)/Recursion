@@ -1,0 +1,31 @@
+/* Time Complexity: O(2^n)
+Space Complexity: O(1)
+Leetcode Question: https://leetcode.com/problems/triangle/
+ */
+
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        return help(triangle.size()-1,-2,triangle);
+    }
+
+    public int help(int row,int prev,List<List<Integer>> triangle){
+        if(row==0){
+            return triangle.get(0).get(0);
+        }
+
+        int minsum=Integer.MAX_VALUE;
+        for(int i=0;i<triangle.get(row).size();i++){
+            if(i==prev || i+1==prev || prev==-2){
+                int prevans=help(row-1,i,triangle);
+                int currentans=triangle.get(row).get(i);
+                int pathsum=prevans+currentans;
+                minsum=Math.min(pathsum,minsum);
+            }
+            else{
+                continue;
+            }
+
+        }
+        return minsum;
+    }
+}
