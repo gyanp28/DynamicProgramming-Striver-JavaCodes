@@ -1,0 +1,40 @@
+?* Time Complexity : O(3^n)
+Space Complexity : O(N)
+Leetcode Question : 931 (https://leetcode.com/problems/minimum-falling-path-sum/description/)
+*/
+
+//so we have many options to start from in the questions so we will use a for loop in the main function get a value 
+//for each case and compare the max and return the finalans.
+
+class Solution {
+    public int minFallingPathSum(int[][] matrix) {
+        int minfinal=Integer.MAX_VALUE;
+        for(int i=0;i<matrix[0].length;i++){
+            int ans=help(0,i,matrix);
+            minfinal=Math.min(ans,minfinal);
+        }
+        return minfinal;
+    }
+
+    public int help(int i,int j,int[][] matrix){
+        //bc 
+        if(i==matrix.length-1){
+            return matrix[i][j];
+        }
+
+        int same=Integer.MAX_VALUE;
+        int left=Integer.MAX_VALUE;
+        int right=Integer.MAX_VALUE;
+        if(i<matrix.length-1){
+            same=help(i+1,j,matrix);
+        }
+        if(j>0){
+            left=help(i+1,j-1,matrix);
+        }
+        if(j<matrix[0].length-1){
+            right=help(i+1,j+1,matrix);
+        }
+        int minpath=Math.min(same,Math.min(left,right))+matrix[i][j];
+        return minpath;
+    }
+}
