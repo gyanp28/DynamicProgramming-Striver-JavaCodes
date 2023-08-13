@@ -1,0 +1,46 @@
+class Solution {
+    public int minFallingPathSum(int[][] matrix) {
+        int n=matrix.length;
+        int[][] dp = new int[n][n]; 
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                dp[i][j]=Integer.MAX_VALUE;
+            }
+        }
+
+        int minfinal=Integer.MAX_VALUE;
+        for(int i=0;i<matrix[0].length;i++){
+            int ans=help(0,i,matrix,dp);
+            minfinal=Math.min(ans,minfinal);
+        }
+        return minfinal;
+    }
+
+    public int help(int i,int j,int[][] matrix,int[][] dp){
+        //bc 
+        if(i==matrix.length-1){
+            return matrix[i][j];
+        }
+
+        if(dp[i][j] !=Integer.MAX_VALUE){
+            return dp[i][j];
+        }
+        //all stuffs
+        int same=Integer.MAX_VALUE;
+        int left=Integer.MAX_VALUE;
+        int right=Integer.MAX_VALUE;
+        if(i<matrix.length-1){
+            same=help(i+1,j,matrix,dp);
+        }
+        if(j>0){
+            left=help(i+1,j-1,matrix,dp);
+        }
+        if(j<matrix[0].length-1){
+            right=help(i+1,j+1,matrix,dp);
+        }
+        
+        //optimal substructure
+        int minpath=Math.min(same,Math.min(left,right))+matrix[i][j];
+        return dp[i][j]=minpath;
+    }
+}
