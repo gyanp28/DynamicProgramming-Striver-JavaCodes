@@ -1,0 +1,35 @@
+/* Time Complexity: O(2^n)
+Space Complexity: O(n*k)
+CodeStudio :https://www.codingninjas.com/studio/problems/subset-sum-equal-to-k_1550954?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=0
+ */
+
+
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+    public static boolean subsetSumToK(int n, int k, int arr[]){
+        return help(0,k,arr);
+    }
+
+    public static boolean help(int i,int k,int[] arr){
+        if(i==arr.length){
+            if(k==0){
+                return true;
+            }
+            return false;
+        }
+
+        boolean a=false;
+        if(arr[i]<=k){
+            a=help(i+1,k-arr[i],arr);
+        }
+        boolean b=help(i+1,k,arr);
+        boolean ans=false;
+        return a||b;
+
+
+
+
+
+    }
+}

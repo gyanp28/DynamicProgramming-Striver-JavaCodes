@@ -1,0 +1,45 @@
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+   
+    public static boolean subsetSumToK(int n, int k, int arr[]){
+        int[][] dp=new int[1001][1001];
+        for(int[] row:dp){
+            Arrays.fill(row,-1);
+        }
+        return help(0,k,arr,dp);
+    }
+
+    public static boolean help(int i,int k,int[] arr,int[][]dp){
+        if(i==arr.length){
+            if(k==0){
+                dp[i][k]=1;
+                return true;
+            }
+            dp[i][k]=0;
+            return false;
+        }
+
+        if(dp[i][k]!=-1){
+            if(dp[i][k]==1){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        boolean a=false;
+        if(arr[i]<=k){
+            a=help(i+1,k-arr[i],arr,dp);
+        }
+        boolean b=help(i+1,k,arr,dp);
+        boolean ans=false;
+        if(a==false && b==false){
+            dp[i][k]=0;
+        }
+        else{
+            dp[i][k]=1;
+        }
+        return (a||b);
+    }
+}
