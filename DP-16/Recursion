@@ -1,0 +1,31 @@
+/* Question Link
+https://www.codingninjas.com/studio/problems/partition-a-set-into-two-subsets-such-that-the-difference-of-subset-sums-is-minimum._842494?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf
+*/
+
+public class Solution {
+    public static int minSubsetSumDifference(int []arr, int n) {
+        int totalsum=0;
+        for(int i=0;i<n;i++){
+            totalsum+=arr[i];
+        }
+        int ans=help(0,0,totalsum,Integer.MAX_VALUE,arr);
+        return ans;
+    }
+
+    public static int help(int i,int sum,int totalsum,int mindiff,int[] arr){
+        //base case
+        if(i==arr.length){
+            int s2=totalsum-sum;
+            int diff=Math.abs(sum-s2);
+            if(diff<mindiff){
+                mindiff=diff;
+            }
+            return mindiff;
+        }
+
+        //do all stuffs
+        mindiff=help(i+1,sum+arr[i],totalsum,mindiff,arr);
+        mindiff=help(i+1,sum,totalsum,mindiff,arr);
+        return mindiff;
+    }
+}
