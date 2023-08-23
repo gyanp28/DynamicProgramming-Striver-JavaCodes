@@ -1,0 +1,33 @@
+/* Given an array arr[] of non-negative integers and an integer sum,
+ the task is to count all subsets of the given array with a sum equal to a given sum.
+
+https://practice.geeksforgeeks.org/problems/perfect-sum-problem5633/0
+*/
+
+
+
+class Solution{
+    public double MOD=(Math.pow(10,9))+7;
+    
+	public int perfectSum(int arr[],int n, int sum){
+	    return help(0,sum,arr);
+	}
+	
+	public int help(int i,int target,int arr[]){
+        if(i==arr.length){
+            if(target==0){
+                return 1;
+            }
+            return 0;
+        }
+
+        //do all stuffs
+        int pick=0;
+        if(arr[i]<=target){
+            pick=help(i+1,target-arr[i],arr);
+        }
+        int nonpick=help(i+1,target,arr);
+        double ans=pick+nonpick%MOD;
+        return (int)ans;
+    }
+}
