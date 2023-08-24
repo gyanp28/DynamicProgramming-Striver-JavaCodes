@@ -1,0 +1,29 @@
+class Solution{
+    static int knapSack(int W, int wt[], int val[], int n){
+        int dp[][]=new int[val.length+1][W+1];
+        for(int[] row:dp){
+            Arrays.fill(row,-1);
+        }
+        return help(n-1,W,wt,val,dp);
+    }
+    
+    static int help(int i,int maxWeight,int[] weight,int[] value,int[][]dp){
+        if(i==0){
+            if(weight[0]<=maxWeight){
+                return value[0];
+            }
+            return 0;
+        }
+        if(dp[i][maxWeight]!=-1){
+            return dp[i][maxWeight];
+        }
+
+        //all stuffs
+        int pick=Integer.MIN_VALUE;
+        if(weight[i]<=maxWeight){
+            pick=value[i]+help(i-1,maxWeight-weight[i],weight,value,dp);
+        }
+        int notpick=0+help(i-1,maxWeight,weight,value,dp);
+        return dp[i][maxWeight]=Math.max(pick,notpick);
+    }
+}

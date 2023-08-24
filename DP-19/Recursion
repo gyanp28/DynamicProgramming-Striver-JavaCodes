@@ -1,0 +1,30 @@
+/* Question Link 
+https://www.codingninjas.com/studio/problems/0-1-knapsack_920542?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=0
+https://practice.geeksforgeeks.org/problems/0-1-knapsack-problem0945/1
+*/
+
+class Solution{
+    static int knapSack(int W, int wt[], int val[], int n){
+        
+        return help(n-1,W,wt,val);
+    }
+    
+    static int help(int i,int maxWeight,int[] weight,int[] value){
+        if(i==0){
+            if(weight[0]<=maxWeight){
+                return value[0];
+            }
+            return 0;
+        }
+        
+
+        //all stuffs
+        int pick=Integer.MIN_VALUE;
+        if(weight[i]<=maxWeight){
+            pick=value[i]+help(i-1,maxWeight-weight[i],weight,value);
+        }
+        int notpick=0+help(i-1,maxWeight,weight,value);
+        return Math.max(pick,notpick);
+    }
+}
+
