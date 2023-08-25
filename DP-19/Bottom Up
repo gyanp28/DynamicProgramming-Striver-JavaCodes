@@ -1,0 +1,29 @@
+class Solution{
+    static int knapSack(int maxw,int wt[],int val[],int n){
+        int dp[][]=new int[n][maxw+1];
+        //base case when i==0 
+        for(int i=0;i<=maxw;i++){
+            if(wt[0]<=i){
+                dp[0][i]=val[0];
+            }
+            else{
+                dp[0][i]=0;
+            }
+        }
+        
+        //all cases 
+        for(int i=1;i<n;i++){
+            for(int j=0;j<=maxw;j++){
+                int notpick=0+dp[i-1][j];
+                int pick=Integer.MIN_VALUE;
+                if(wt[i]<=j){
+                    pick=val[i]+dp[i-1][j-wt[i]];
+                }
+                dp[i][j]=Math.max(pick,notpick);
+            }
+            
+        }
+        return dp[n-1][maxw];
+        
+    }
+}
