@@ -1,0 +1,29 @@
+/* https://leetcode.com/problems/coin-change/description/  */
+
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int ans=help(coins,amount);
+        if(ans==Integer.MAX_VALUE){
+            return -1;
+        }
+        return ans;
+    }
+
+    public int help(int[] arr,int amt){
+        int n=arr.length;
+        if(amt==0){
+            return 0;
+        }
+
+        int mini=Integer.MAX_VALUE;
+        for(int i=n-1;i>=0;i--){
+            if(arr[i]<=amt){
+                int ans=help(arr,amt-arr[i]);
+                if (ans != Integer.MAX_VALUE) {
+                    mini = Math.min(mini, ans + 1);
+                }
+            }
+        }
+        return mini;
+    }
+}
