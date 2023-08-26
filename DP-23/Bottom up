@@ -1,0 +1,32 @@
+import java.util.*;
+public class Solution {
+    public static int unboundedKnapsack(int n, int maxwt, int[] val, int[] weight) {
+        int dp[][]=new int[n][maxwt+1];
+        //base case
+        for(int wt=0;wt<=maxwt;wt++){
+            if(wt%weight[0]==0){
+                int num=wt/weight[0];
+                dp[0][wt]=val[0]*num;
+            }
+            else{
+                dp[0][wt]=0;
+            }
+        }
+
+        //all cases
+        for(int i=1;i<n;i++){
+            for(int j=1;j<=maxwt;j++){
+                int notpick=dp[i-1][j];
+                int pick=Integer.MIN_VALUE;
+                if(weight[i]<=j){
+                    pick=val[i]+dp[i][j-weight[i]];
+                }
+                dp[i][j]=Math.max(pick,notpick);
+            }
+        }
+
+        return dp[n-1][maxwt];
+    }
+}
+
+
