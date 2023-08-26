@@ -1,0 +1,32 @@
+/* https://leetcode.com/problems/coin-change-ii/description/  */
+
+class Solution {
+    public int change(int amount, int[] coins) {
+        int n=coins.length;
+        return help(n-1,amount,coins);
+    }
+
+    public int help(int i,int target,int[] arr){
+        //base case
+        if(target==0){
+            return 1;
+        }
+
+        if(i==0){
+            if(target%arr[0]!=0){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+
+        //all cases
+        int notpick=help(i-1,target,arr);
+        int pick=0;
+        if(arr[i]<=target){
+            pick=help(i,target-arr[i],arr);
+        }
+        return pick+notpick;
+    }
+}

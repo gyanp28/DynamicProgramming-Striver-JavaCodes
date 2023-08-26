@@ -1,0 +1,38 @@
+class Solution {
+    public int change(int amount, int[] coins) {
+        int n=coins.length;
+        int dp[][]=new int[n][amount+1];
+        for(int[] row:dp){
+            Arrays.fill(row,-1);
+        }
+        return help(n-1,amount,coins,dp);
+    }
+
+    public int help(int i,int target,int[] arr,int[][]dp){
+        //base case
+        if(target==0){
+            return 1;
+        }
+
+        if(i==0){
+            if(target%arr[0]!=0){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+
+        if(dp[i][target]!=-1){
+            return dp[i][target];
+        }
+
+        //all cases
+        int notpick=help(i-1,target,arr,dp);
+        int pick=0;
+        if(arr[i]<=target){
+            pick=help(i,target-arr[i],arr,dp);
+        }
+        return dp[i][target]=pick+notpick;
+    }
+}
