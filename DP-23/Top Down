@@ -1,0 +1,34 @@
+import java.util.*;
+public class Solution {
+    public static int unboundedKnapsack(int n, int maxwt, int[] val, int[] weight) {
+        int dp[][]=new int[n][maxwt+1];
+        for(int[]row:dp){
+            Arrays.fill(row,-1);
+        }
+        return help(n-1,maxwt,val,weight,dp);
+    }
+
+    public static int help(int i,int maxwt,int []val,int[] weight , int[][]dp){
+        //base case
+        if(i==0){
+            if(maxwt%weight[0]==0){
+                int num=maxwt/weight[0];
+                return val[0]*num;
+            }
+            else{
+                return 0;
+            }
+        }
+        if(dp[i][maxwt]!=-1){
+            return dp[i][maxwt];
+        }
+
+        //all stuffs
+        int notpick=0+help(i-1,maxwt,val,weight,dp);
+        int pick=Integer.MIN_VALUE;
+        if(weight[i]<=maxwt){
+            pick=val[i]+help(i,maxwt-weight[i],val,weight,dp);
+        }
+        return dp[i][maxwt]=Math.max(pick,notpick);
+    }
+}
